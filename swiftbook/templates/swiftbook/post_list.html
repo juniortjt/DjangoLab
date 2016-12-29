@@ -1,0 +1,28 @@
+{% extends 'swiftbook/base.html' %}
+
+{% block content %}
+
+{% for post in posts %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="publishedDate">published: {{ post.published_date }}</p>
+                <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <br><br>
+                <p class="paragraph">{{ post.text|truncatechars:300 }}</p>
+                <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                <br><br>
+
+                <div class="center-button">
+                    <a href="{% url 'post_detail' pk=post.pk %}"><button type="button" class="btn btn-default btn-round-lg btn-lg">Show me more</button></a>
+                </div>
+                <br><br><br><br>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+
+{% endblock content %}
+

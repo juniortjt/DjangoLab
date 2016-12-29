@@ -1,0 +1,72 @@
+{% load staticfiles %}
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/swiftbook.css' %}">
+    <title>SwiftBook</title>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="http://127.0.0.1:8000"><img src="{% static 'images/Swift_logo.png' %}"
+                                                                      alt="SwiftBook"></a>
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{% url 'post_list' %}" data-scroll="">Posts</a></li>
+                    <li><a href="#konakt" data-scroll="">Contact</a></li>
+                    <li><a href="#facebook" data-scroll="">Facebook</a></li>
+
+
+                </ul>
+                {% if user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+
+                    {% if request.user.is_superuser %}
+                        <li><a href="{% url 'post_new' %}" class="top-menu"><span
+                            class="glyphicon glyphicon-plus"></span></a></li>
+                    {% endif %}
+
+                    <li><a href=""><small>Logged as: {{ user.username }}</small></a></li>
+                    <li><a href="{% url 'logout' %}"><small>Log out</small></a></li>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="{% url 'login' %}" class="top-menu">Sign In</a></li>
+
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+
+
+                    <div class="white-to-transp">
+                    </div>
+            </div>
+
+        </div>
+        <div class="separator-for-nav"></div>
+    </nav>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<section>
+    <hr>
+</section>
+
+</body>
+</html>

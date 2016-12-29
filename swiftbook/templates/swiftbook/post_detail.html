@@ -1,0 +1,73 @@
+{% extends 'swiftbook/base.html' %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                {% if post.published_date %}
+                <div class="date">
+                    <p class="publishedDate">published: {{ post.published_date }}</p>
+                </div>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span
+                        class="glyphicon glyphicon-pencil"></span></a>
+                <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span
+                        class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
+                <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <img src=""
+                <br><br>
+                <p class="paragraph">{{ post.text|linebreaksbr }}...</p>
+                <br><br>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="center-button">
+                    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+                </div>
+                <br><br><br>
+
+                {% for comment in post.comments.all %}
+                {% if user.is_authenticated or comment.approved_comment %}
+                <div class="comment">
+                    <div class="date">
+
+
+                        {% if not comment.approved_comment %}
+                        {% if request.user.is_superuser %}
+                        <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span
+                                class="glyphicon glyphicon-remove"></span></a>
+                        <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span
+                                class="glyphicon glyphicon-ok"></span></a>
+                        {{ comment.created_date }}
+                        <strong>{{ comment.author }}</strong>
+                        <p>{{ comment.text|linebreaks }}</p>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% if comment.approved_comment %}
+                    {{ comment.created_date }}
+                    <strong>{{ comment.author }}</strong>
+                    <p>{{ comment.text|linebreaks }}</p>
+                    {% endif %}
+
+                </div>
+                {% endif %}
+                {% empty %}
+                <p>No comments yet</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
