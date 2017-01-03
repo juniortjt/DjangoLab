@@ -107,4 +107,27 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'mysite.middleware.AutoLogout',
+]
+
+# Auto logout delay in minutes
+AUTO_LOGOUT_DELAY = 5
+
 LOGIN_REDIRECT_URL = '/'
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'juniortjt'
+EMAIL_HOST_PASSWORD = 'polska98'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

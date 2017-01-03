@@ -14,3 +14,16 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text',)
+
+
+class ContactForm(forms.Form):
+    contact_email = forms.EmailField(required=True)
+    content = forms.CharField(
+        required=True,
+        widget=forms.Textarea(attrs={'rows':10, 'cols':100}),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['contact_email'].label = "Your email:"
+        self.fields['content'].label = "Message:"
