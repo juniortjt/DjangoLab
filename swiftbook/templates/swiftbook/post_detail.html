@@ -18,11 +18,17 @@
                         class="glyphicon glyphicon-remove"></span></a>
                 {% endif %}
                 <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-                <img src=""
                 <br><br>
-                <p class="paragraph">{{ post.text|linebreaksbr }}...</p>
+                <p class="paragraph">{{ post.text|linebreaksbr }}</p>
                 <br><br>
                 <br><br>
+                {% if post.document.size != None %}
+                <p>Attachment:
+                    <a href='{{ MEDIA_URL }}{{ post.document.url }}'>{{ post.filename }}</a>
+                    <small>{{ post.document.size|filesizeformat }}</small>
+                </p>
+                <br>
+                {% endif %}
             </div>
         </div>
     </div>

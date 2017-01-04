@@ -3,10 +3,11 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post, Comment
-from .forms import PostForm, CommentForm, ContactForm
+from .forms import PostForm, CommentForm, ContactForm, DocumentForm
 from django.core.mail import EmailMessage
 from django.template import Context
 from django.template.loader import get_template
+
 
 
 def post_list(request):
@@ -22,11 +23,11 @@ def post_detail(request, pk):
 @login_required
 def post_new(request):
     if request.method == "POST":
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -42,7 +43,7 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
+            # post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
@@ -117,3 +118,16 @@ def contact(request):
             return redirect('contact')
 
     return render(request, 'contact.html', {'form': form_class,})
+
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
+    else:
+        form = DocumentForm()
+    return render(request, 'swiftbook/temp.html', {
+        'form': form
+    })
