@@ -1,0 +1,21 @@
+{% extends 'swiftbook/base.html' %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h1>Contact</h1>
+                <br>
+                <p class="form-like">Contact name: {{ user.username }} </p>
+                <form role="form" action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

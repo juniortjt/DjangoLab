@@ -1,18 +1,19 @@
 {% load staticfiles %}
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/swiftbook.css' %}">
-     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
-    <link rel="stylesheet" href="{% static 'css/archive.css' %}">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>SwiftBook</title>
+    {% block extra_head %}
+    {% endblock %}
 </head>
 
 <body>
-
 <header>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -40,12 +41,16 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if request.user.is_superuser %}
-                        <li><a href="{% url 'post_new' %}" class="top-menu"><span
+                    <li><a href="{% url 'post_new' %}" class="top-menu"><span
                             class="glyphicon glyphicon-plus"></span></a></li>
                     {% endif %}
 
-                    <li><a href=""><small>Logged as: {{ user.username }}</small></a></li>
-                    <li><a href="{% url 'logout' %}"><small>Log out</small></a></li>
+                    <li><a href="">
+                        <small>Logged as: {{ user.username }}</small>
+                    </a></li>
+                    <li><a href="{% url 'logout' %}">
+                        <small>Log out</small>
+                    </a></li>
                     {% else %}
                     <ul class="nav navbar-nav navbar-right">
 
@@ -65,28 +70,11 @@
     </nav>
 </header>
 
+{% block body %}
 {% block content %}
 {% endblock %}
-
-
-<hr>
+{% endblock %}
+{% block extra_body %}
+{% endblock %}
 </body>
-
-<script>
-    // toggle month
-    var toggleMonth = function(month) {
-        $(month).children('.events').slideToggle('slow');
-        $(month).find('.month-data div.collapsed').toggle();
-        $(month).find('.month-data div.expanded').toggle();
-    }
-
-    // expand the current month
-    toggleMonth($('#{{now.year}}-{{now.month}}'));
-
-    // intercept click to toggle month
-    $('.month-data').click(function() {
-        var month = $(this).parent();
-        toggleMonth(month);
-    });
-</script>
 </html>

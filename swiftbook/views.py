@@ -5,19 +5,66 @@ from django.utils import timezone
 from .models import Post, Comment
 from .forms import PostForm, CommentForm, ContactForm, DocumentForm
 from django.core.mail import EmailMessage
-from django.template import Context
+from django.template import Context, loader
 from django.template.loader import get_template
+import datetime
+from django.http import HttpResponse
 
 
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'swiftbook/post_list.html', {'posts': posts})
+    now = datetime.datetime.now()
+
+    # create a dict with the years and months:events
+    post_dict = {}
+    for i in range(posts[0].published_date.year, posts[len(posts) - 1].published_date.year - 1, -1):
+        post_dict[i] = {}
+        for month in range(1, 13):
+            post_dict[i][month] = []
+    for post in posts:
+        post_dict[post.published_date.year][post.published_date.month].append(post)
+
+    # this is necessary for the years to be sorted
+    post_sorted_keys = list(reversed(sorted(post_dict.keys())))
+    list_posts = []
+    for key in post_sorted_keys:
+        adict = {key: post_dict[key]}
+        list_posts.append(adict)
+
+    return render(request, 'swiftbook/post_list.html', {'posts': posts, 'now': now, 'list_posts': list_posts})
 
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'swiftbook/post_detail.html', {'post': post})
+
+
+def post_index(request):
+    posts = Post.objects.filter().order_by('-published_date')
+    now = datetime.datetime.now()
+
+    # create a dict with the years and months:events
+    post_dict = {}
+    for i in range(posts[0].published_date.year, posts[len(posts) - 1].published_date.year - 1, -1):
+        post_dict[i] = {}
+        for month in range(1, 13):
+            post_dict[i][month] = []
+    for post in posts:
+        post_dict[post.published_date.year][post.published_date.month].append(post)
+
+    # this is necessary for the years to be sorted
+    post_sorted_keys = list(reversed(sorted(post_dict.keys())))
+    list_posts = []
+    for key in post_sorted_keys:
+        adict = {key: post_dict[key]}
+        list_posts.append(adict)
+
+    t = loader.get_template('swiftbook/temp.html')
+    c = Context({
+        'now': now, 'list_posts': list_posts,
+    })
+    return HttpResponse(t.render(c))
 
 
 @login_required
@@ -131,3 +178,4 @@ def model_form_upload(request):
     return render(request, 'swiftbook/temp.html', {
         'form': form
     })
+

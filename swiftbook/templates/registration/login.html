@@ -6,6 +6,10 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
+{% load socialaccount %}
+
+{% get_social_accounts user as accounts %}
+
 
 <section>
     <div class="container">
@@ -13,6 +17,8 @@
             <div class="col-md-3 col-md-offset-4">
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
+
+
                     <table>
                         <tr>
                             <td>{{ form.username.label_tag }}</td>

@@ -6,6 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <hr>
                 {% if post.published_date %}
                 <div class="date">
                     <p class="publishedDate">published: {{ post.published_date }}</p>
@@ -34,10 +35,10 @@
     </div>
 </section>
 <section>
-    <hr>
+    <hr class="comments">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="center-button">
                     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
                 </div>
@@ -45,6 +46,7 @@
 
                 {% for comment in post.comments.all %}
                 {% if user.is_authenticated or comment.approved_comment %}
+                <hr class="com">
                 <div class="comment">
                     <div class="date">
 
@@ -71,6 +73,7 @@
                 {% endif %}
                 {% empty %}
                 <p>No comments yet</p>
+
                 {% endfor %}
             </div>
         </div>

@@ -21,10 +21,11 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_post, name='add_comment_to_post'),
     url(r'^comment/(?P<pk>\d+)/approve/$', views.comment_approve, name='comment_approve'),
     url(r'^comment/(?P<pk>\d+)/remove/$', views.comment_remove, name='comment_remove'),
-
     url(r'^contact/$', views.contact, name='contact'),
 
-    url(r'^doc/$', views.model_form_upload, name='model_form_upload'),
+    url(r'^doc/$', views.post_index, name='post_index'),
+
+
 
 ]
 

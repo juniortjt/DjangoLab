@@ -61,3 +61,24 @@ body {
 .btn-round-lg{
     border-radius: 22.5px;
 }
+
+
+.rcorners2 {
+    border-radius: 25px;
+    border: 2px solid #f75d37;
+    padding: 20px;
+    width: auto;
+    height: auto;
+    margin: auto;}
+
+hr.comments {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+}
+
+hr.com {
+    border : 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
