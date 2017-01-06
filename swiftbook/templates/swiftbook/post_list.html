@@ -1,70 +1,70 @@
 {% extends 'swiftbook/base.html' %}
 
 {% block content %}
-    <div class="col-md-6 col-md-offset-3">
-        {% for post in posts %}
+<section class="text-center">
+    <div class="container">
+        <div class="col-md-8 col-md-offset-1">
+            {% for post in posts %}
 
-        <section>
 
             <div class="col-md-12">
                 <hr>
-                
                 <p class="publishedDate">published: {{ post.published_date }}</p>
                 <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 <br><br>
                 <p class="paragraph">{{ post.text|truncatechars:700 }}</p>
-                <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                <a href="{% url 'post_detail' pk=post.pk %}"><p class="comments-class">Comments: {{ post.approved_comments.count }}</p></a>
                 <br><br>
 
                 <div class="center-button">
                     <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-lg btn-default"></span>Show me more</a>
                 </div>
                 <br><br><br><br>
-
             </div>
 
 
-        </section>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <h4 align="center">SwiftBook archive</h4>
 
+            {% for post_year in list_posts %}
+            <ul class="year">{{post_year.keys.0}}
+                {% for month, posts in post_year.values.0.items %}
 
-        {% endfor %}
-    </div>
-</div>
+                <!--show only months with events! -->
+                {% if posts %}
+                <li id="{{post_year.keys.0}}-{{month}}" class="month">
+                    <div class="month-data">
+                        <div class="collapsed">►&nbsp;</div>
+                        <div class="expanded" style="display:none;">▼&nbsp; </div>
+                        <span class="name">{{posts.0.published_date|date:"F"}}</span>
+                        <span class="counter"> ({{posts|length}})</span>
 
-<div class="col-md-2 col-md-offset-1">
-    <h1>Archive</h1>
-    {% for post_year in list_posts %}
-    <ul class="year">{{post_year.keys.0}}
-        {% for month, posts in post_year.values.0.items %}
-
-        <!--show only months with events! -->
-        {% if posts %}
-        <li id="{{post_year.keys.0}}-{{month}}" class="month">
-            <div class="month-data">
-                <div class="collapsed">►&nbsp;</div>
-                <div class="expanded" style="display:none;">▼&nbsp; </div>
-                <span class="name">{{posts.0.published_date|date:"F"}}</span>
-                <span class="counter"> ({{posts|length}})</span>
-
-            </div>
-            <ul class="events" style="display:none;">
-                {% for post in posts %}
-                <li class="event">
-                    <!--<a class="title" href="#">{{post.name}}</a>-->
-                    <div class="date">{{post.published_date|date:"j M Y"}}</div>
-                    <a href="{% url 'post_detail' pk=post.pk %}">
-                        <div class="title">{{post.title}}</div>
-                    </a>
+                    </div>
+                    <ul class="events" style="display:none;">
+                        {% for post in posts %}
+                        <li class="event">
+                            <!--<a class="title" href="#">{{post.name}}</a>-->
+                            <div class="date">{{post.published_date|date:"j M Y"}}</div>
+                            <a href="{% url 'post_detail' pk=post.pk %}">
+                                <div class="title">{{post.title}}</div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
                 </li>
                 {% endfor %}
             </ul>
-        </li>
-        {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endfor %}
-</div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+
 {% endblock content %}
 
 

@@ -33,7 +33,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="{% url 'post_list' %}" data-scroll="">Posts</a></li>
                     <li><a href="{% url 'contact' %}" data-scroll="">Contact</a></li>
-                    <li><a href="#facebook" data-scroll="">Facebook</a></li>
+                    <li><a href="{% url 'photologue:pl-photo-archive' %}" data-scroll="">Workshops</a></li>
 
 
                 </ul>
@@ -70,11 +70,45 @@
     </nav>
 </header>
 
+
 {% block body %}
 {% block content %}
 {% endblock %}
 {% endblock %}
 {% block extra_body %}
 {% endblock %}
+<div class="footer-always-bottom">
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="my-footer">
+                    <br>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p class="footer-powered">Powered by:</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-1 col-md-offset-4 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                        <span class="fa fa-html5 fa-3x" style="color:white"></span>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <span class="fa fa-css3 fa-3x" style="color:white"></span>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <img class="img-footer" src="{% static 'images/django_logo.png' %}">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <img class="img-footer" src="{% static 'images/python_logo.png' %}">
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <br>
+                        <p class="footer-style">Copyright: Kacper Mazurkiewicz 2017</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

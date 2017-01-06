@@ -1,13 +1,24 @@
 {% load staticfiles %}
 <html>
 <head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/swiftbook.css' %}">
-     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'css/archive.css' %}">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="">
     <title>SwiftBook</title>
 </head>
 
@@ -32,7 +43,7 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="{% url 'post_list' %}" data-scroll="">Posts</a></li>
                     <li><a href="{% url 'contact' %}" data-scroll="">Contact</a></li>
-                    <li><a href="#facebook" data-scroll="">Facebook</a></li>
+                    <li><a href="{% url 'photologue:pl-photo-archive' %}" data-scroll="">Workshops</a></li>
 
 
                 </ul>
@@ -40,12 +51,18 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     {% if request.user.is_superuser %}
-                        <li><a href="{% url 'post_new' %}" class="top-menu"><span
+                    <li><a href="{% url 'post_new' %}" class="top-menu"><span
                             class="glyphicon glyphicon-plus"></span></a></li>
                     {% endif %}
 
-                    <li><a href=""><small>Logged as: {{ user.username }}</small></a></li>
-                    <li><a href="{% url 'logout' %}"><small>Log out</small></a></li>
+                    <li><a href="">
+                        <small>Logged as: {{ user.username }}</small>
+                    </a></li>
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <small>Log out</small>
+                        </a>
+                    </li>
                     {% else %}
                     <ul class="nav navbar-nav navbar-right">
 
@@ -54,10 +71,7 @@
                         <li><a href="{% url 'register' %}">Register</a></li>
                         {% endif %}
                     </ul>
-
-
-                    <div class="white-to-transp">
-                    </div>
+                </ul>
             </div>
 
         </div>
@@ -67,10 +81,42 @@
 
 {% block content %}
 {% endblock %}
+<div class="footer-always-bottom">
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="my-footer">
+                    <br>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p class="footer-powered">Powered by:</p>
+                    </div>
+                    <br>
 
+                    <div class="col-md-1 col-md-offset-4 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                        <span class="fa fa-html5 fa-3x" style="color:white"></span>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <span class="fa fa-css3 fa-3x" style="color:white"></span>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <img class="img-footer" src="{% static 'images/django_logo.png' %}">
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2">
+                        <img class="img-footer" src="{% static 'images/python_logo.png' %}">
+                    </div>
 
-<hr>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <br>
+                        <p class="footer-style">Copyright: Kacper Mazurkiewicz 2017</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 </body>
+
 
 <script>
     // toggle month
@@ -79,14 +125,24 @@
         $(month).find('.month-data div.collapsed').toggle();
         $(month).find('.month-data div.expanded').toggle();
     }
+    {% if post != None %}
+        toggleMonth('#{{post.published_date.year}}-{{post.published_date.month}}')
 
-    // expand the current month
-    toggleMonth($('#{{now.year}}-{{now.month}}'));
+    {% else %}
+        toggleMonth($('#{{now.year}}-{{now.month}}'));
+    {% endif %}
 
     // intercept click to toggle month
     $('.month-data').click(function() {
         var month = $(this).parent();
         toggleMonth(month);
     });
+
+
+
+
+
+
+
 </script>
 </html>

@@ -25,8 +25,6 @@ urlpatterns = [
 
     url(r'^doc/$', views.post_index, name='post_index'),
 
-
-
 ]
 
 if settings.DEBUG:

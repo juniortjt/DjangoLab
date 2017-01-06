@@ -5,7 +5,6 @@ import datetime, os
 from markdown import markdown
 from django.conf import settings
 
-
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -64,3 +63,4 @@ class Document(models.Model):
 
     def __str__(self):
         return self.description
+

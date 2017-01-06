@@ -9,8 +9,11 @@ from django.template import Context, loader
 from django.template.loader import get_template
 import datetime
 from django.http import HttpResponse
+from photologue.models import Photo
+from django.views.generic import CreateView
 
-
+class PhotoCreate(CreateView):
+    model = Photo
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -37,7 +40,27 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'swiftbook/post_detail.html', {'post': post})
+
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+    now = datetime.datetime.now()
+
+    # create a dict with the years and months:events
+    post_dict = {}
+    for i in range(posts[0].published_date.year, posts[len(posts) - 1].published_date.year - 1, -1):
+        post_dict[i] = {}
+        for month in range(1, 13):
+            post_dict[i][month] = []
+    for pst in posts:
+        post_dict[pst.published_date.year][pst.published_date.month].append(pst)
+
+    # this is necessary for the years to be sorted
+    post_sorted_keys = list(reversed(sorted(post_dict.keys())))
+    list_posts = []
+    for key in post_sorted_keys:
+        adict = {key: post_dict[key]}
+        list_posts.append(adict)
+
+    return render(request, 'swiftbook/post_detail.html', {'post': post,  'now': now, 'list_posts': list_posts})
 
 
 def post_index(request):

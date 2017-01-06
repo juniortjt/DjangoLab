@@ -35,17 +35,22 @@ p.form-like {
     font-weight: 700;
 }
 
-
 body {
     padding-top: 150px;
+    margin: 0 0 200px; /* bottom = footer height */
 
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 .center-button {
-    text-align:center;
+    text-align: center;
 }
 
-.navbar-brand>img {
+.navbar-brand > img {
     max-height: 100%;
     height: 100%;
     width: auto;
@@ -58,10 +63,9 @@ body {
 
 }
 
-.btn-round-lg{
+.btn-round-lg {
     border-radius: 22.5px;
 }
-
 
 .rcorners2 {
     border-radius: 25px;
@@ -69,7 +73,8 @@ body {
     padding: 20px;
     width: auto;
     height: auto;
-    margin: auto;}
+    margin: auto;
+}
 
 hr.comments {
     height: 10px;
@@ -78,7 +83,55 @@ hr.comments {
 }
 
 hr.com {
-    border : 0;
+    border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.my-footer {
+    height: 130px;
+    background-color: #f75d37;
+    width: auto;
+
+}
+
+.footer-always-bottom {
+   background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 130px;
+    width: 100%;
+    overflow:hidden;
+}
+
+position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+
+p.footer-style {
+    color: white;
+    text-align: right;
+    font-size: 10px;
+    padding-right: 20px;
+}
+
+p.footer-powered {
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    padding-right: 20px;
+}
+
+.img-footer {
+    height: auto;
+    width: 42px;
+}
+
+p.comments-class {
+    text-align: left;
 }

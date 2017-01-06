@@ -8,7 +8,7 @@ ul, li {
 }
 
 .month {
-    width: 300px;
+    width: auto;
     font-size:100%;
     font-weight:normal;
     margin: 10px;
