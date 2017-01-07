@@ -8,6 +8,7 @@ from photologue.models import Photo, Gallery
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
     url(r'^workshops/', include('photologue.urls', namespace="photologue"), name='workshops'),
     url(r'^workshops/add/$', CreateView.as_view(model=Photo, fields=['title','slug','image'], success_url='/workshops/photo'), name='add-photo'),
     url(r'^accounts/login/$', django.contrib.auth.views.login, name='login'),

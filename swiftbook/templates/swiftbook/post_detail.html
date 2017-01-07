@@ -19,7 +19,7 @@
                 {% endif %}
                 <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 <br><br>
-                <p class="paragraph">{{ post.text|linebreaksbr }}</p>
+                <p class="paragraph">{{ post.text|safe }}</p>
                 <br><br>
                 <br><br>
                 {% if post.document.size != None %}
@@ -94,14 +94,14 @@
                                 class="glyphicon glyphicon-ok"></span></a>
                         {{ comment.created_date }}
                         <strong>{{ comment.author }}</strong>
-                        <p>{{ comment.text|linebreaks }}</p>
+                        <p>{{ comment.text|safe }}</p>
                         {% endif %}
                         {% endif %}
                     </div>
                     {% if comment.approved_comment %}
                     {{ comment.created_date }}
                     <strong>{{ comment.author }}</strong>
-                    <p>{{ comment.text|linebreaks }}</p>
+                    <p>{{ comment.text|safe}}</p>
                     {% endif %}
 
                 </div>

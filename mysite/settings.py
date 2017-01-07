@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'fontawesome',
     'photologue',
     'sortedm2m',
+    'tinymce',
 )
 
 SITE_ID = 1
@@ -144,3 +145,18 @@ EMAIL_USE_TLS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme' : 'advanced',
+    'theme_advanced_buttons1' : 'undo,redo,styleselect,bold,italic,underline,'
+                                'separator,bullist,numlist,separator,link,unlink',
+    'theme_advanced_buttons2' : 'code, image, forecolor, backcolor, emoticons, codesample',
+    'theme_advanced_buttons3' : '',
+    'theme_advanced_toolbar_location' : 'top',
+    'theme_advanced_toolbar_align': 'left',
+    'paste_text_sticky': True,
+    'paste_text_sticky_default' : True,
+    'valid_styles' : 'font-weight,font-style,text-decoration',
+    'width' : '700px',
+    'height' : '300px',
+}

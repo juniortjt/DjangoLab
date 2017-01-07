@@ -4,6 +4,7 @@ from PIL import Image
 import datetime, os
 from markdown import markdown
 from django.conf import settings
+from tinymce.models import HTMLField
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
@@ -13,7 +14,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
     published_date = models.DateTimeField(
-        blank=True, null=True)
+        default=timezone.now, null=True)
 
     def publish(self):
         self.published_date = timezone.now()

@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Post, Comment, Document
 from photologue.models import Photo
 from django.views.generic import CreateView
+from tinymce.widgets import TinyMCE
+
 
 class PostForm(forms.ModelForm):
     class Meta:

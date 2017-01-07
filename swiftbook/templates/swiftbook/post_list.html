@@ -12,7 +12,7 @@
                 <p class="publishedDate">published: {{ post.published_date }}</p>
                 <h1 class="title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 <br><br>
-                <p class="paragraph">{{ post.text|truncatechars:700 }}</p>
+                <p class="paragraph">{{ post.text|truncatechars:700 | safe }}</p>
                 <a href="{% url 'post_detail' pk=post.pk %}"><p class="comments-class">Comments: {{ post.approved_comments.count }}</p></a>
                 <br><br>
 
