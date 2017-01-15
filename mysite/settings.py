@@ -150,7 +150,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme' : 'advanced',
     'theme_advanced_buttons1' : 'undo,redo,styleselect,bold,italic,underline,'
                                 'separator,bullist,numlist,separator,link,unlink',
-    'theme_advanced_buttons2' : 'code, image, forecolor, backcolor, emoticons, codesample',
+    'theme_advanced_buttons2' : 'fontselect, code, image, forecolor, backcolor, emoticons, codesample',
     'theme_advanced_buttons3' : '',
     'theme_advanced_toolbar_location' : 'top',
     'theme_advanced_toolbar_align': 'left',
