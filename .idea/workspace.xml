@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a02dcc12-6f32-4a38-8d35-46e2d8462f9d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/swiftbook/templates/swiftbook/Facebook.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/swiftbook/templates/swiftbook/contact.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mysite/settings.py" afterPath="$PROJECT_DIR$/mysite/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/swiftbook/templates/swiftbook/base.html" afterPath="$PROJECT_DIR$/swiftbook/templates/swiftbook/base.html" />
-    </list>
+    <list default="true" id="a02dcc12-6f32-4a38-8d35-46e2d8462f9d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
